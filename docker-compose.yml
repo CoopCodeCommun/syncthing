@@ -1,0 +1,39 @@
+version: "3.7"
+services:
+  syncGDNA:
+    image: linuxserver/syncthing:latest
+    volumes:
+      - "./config:/config"
+      - "${DIRECTORY_TO_SYNC}:/mnt/sync"
+      # - "/home/slaan:/mnt/slaan"
+    ports:
+      - 22000:22000
+      - 21027:21027/udp
+      # - 8384:8384
+    networks:
+      - traefik-kim
+    environment:
+      PGID: 0
+      PUID: 0
+    deploy:
+      mode: global
+      placement:
+        constraints:
+          - node.role == manager
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+      labels:
+        - "traefik.docker.network=traefik-kim"
+        - "traefik.port=8384"
+        - "traefik.backend.loadbalancer.stickiness=true"
+        - "traefik.frontend.rule=Host:${DOMAIN}"
+        - "traefik.enable=true"
+
+
+networks:
+  traefik-kim:
+    external:
+      name: traefik-kim
