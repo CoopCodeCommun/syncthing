@@ -1,2 +1,2 @@
-DIRECTORY_TO_SYNC="/home/syncthing/data"
-DOMAIN="sync.gdna.fr"
+DIRECTORY_TO_SYNC=/home/syncthing/data
+DOMAIN=sync.gdna.fr
