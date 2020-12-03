@@ -1,6 +1,6 @@
 version: "3.7"
 services:
-  syncGDNA:
+  syncthing:
     image: linuxserver/syncthing:latest
     volumes:
       - "./config:/config"
