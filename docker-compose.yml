@@ -1,10 +1,11 @@
 # docker-compose config | docker stack deploy --compose-file - 
-
+'''
 docker stack rm Syncthing 
 git pull 
 docker-compose config >> docker-compose-gdnafr.yml
 docker stack deploy -c docker-compose-gdnafr.yml Syncthing
 docker service logs -f Syncthing_syncthing
+'''
 
 version: "3.7"
 services:
