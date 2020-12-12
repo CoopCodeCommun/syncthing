@@ -6,10 +6,10 @@ services:
     volumes:
       - ./config:/config
       - ${DIRECTORY_TO_SYNC}:/mnt/sync
+      - TZ=Europe/Paris
     ports:
       - 22000:22000
       - 21027:21027/udp
-      - TZ=Europe/Paris
     networks:
       - traefik-kim
     environment:
