@@ -20,9 +20,9 @@ services:
     networks:
       - traefik-kim
     environment:
-      TZ: Europe/Paris
-      PGID: 1000
-      PUID: 1000
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
     deploy:
       mode: global
       placement:
