@@ -28,7 +28,7 @@ services:
         - "traefik.docker.network=traefik-kim"
         - "traefik.port=8384"
         - "traefik.backend.loadbalancer.stickiness=true"
-        - "traefik.frontend.rule=Host:${DOMAIN}"
+        - "traefik.frontend.rule=Host:sync.gdna.fr"
         - "traefik.enable=true"
 
 
