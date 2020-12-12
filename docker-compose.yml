@@ -1,19 +1,20 @@
 version: "3.7"
 services:
   syncthing:
-    image: linuxserver/syncthing:latest
+    # image: linuxserver/syncthing:latest
+    image: ghcr.io/linuxserver/syncthing
     volumes:
       - ./config:/config
-      - /home/syncthing/data:/mnt/sync
+      - ${DIRECTORY_TO_SYNC}:/mnt/sync
     ports:
       - 22000:22000
       - 21027:21027/udp
-      # - 8384:8384
+      - TZ=Europe/Paris
     networks:
       - traefik-kim
     environment:
-      PGID: 0
-      PUID: 0
+      PGID: 1000
+      PUID: 1000
     deploy:
       mode: global
       placement:
@@ -28,7 +29,7 @@ services:
         - "traefik.docker.network=traefik-kim"
         - "traefik.port=8384"
         - "traefik.backend.loadbalancer.stickiness=true"
-        - "traefik.frontend.rule=Host:sync.gdna.fr"
+        - "traefik.frontend.rule=Host:${DOMAIN}"
         - "traefik.enable=true"
 
 
