@@ -3,8 +3,8 @@ services:
   syncthing:
     image: linuxserver/syncthing:latest
     volumes:
-      - "./config:/config"
-      - "${DIRECTORY_TO_SYNC}:/mnt/sync"
+      - ./config:/config
+      - ${DIRECTORY_TO_SYNC}:/mnt/sync
       # - "/home/slaan:/mnt/slaan"
     ports:
       - 22000:22000
