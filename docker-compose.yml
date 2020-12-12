@@ -4,7 +4,7 @@ services:
     image: linuxserver/syncthing:latest
     volumes:
       - ./config:/config
-      - "${DIRECTORY_TO_SYNC}:/mnt/sync"
+      - /home/syncthing/data:/mnt/sync
     ports:
       - 22000:22000
       - 21027:21027/udp
