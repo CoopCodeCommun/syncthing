@@ -20,7 +20,7 @@ services:
     networks:
       - traefik-kim
     environment:
-      - TZ=Europe/Paris
+      TZ: Europe/Paris
       PGID: 1000
       PUID: 1000
     deploy:
