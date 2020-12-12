@@ -4,6 +4,7 @@
 # git pull 
 # docker-compose config >> docker-compose-gdnafr.yml
 # docker stack deploy -c docker-compose-gdnafr.yml Syncthing
+# docker service logs -f Syncthing_syncthing
 
 version: "3.7"
 services:
@@ -13,13 +14,13 @@ services:
     volumes:
       - ./config:/config
       - ${DIRECTORY_TO_SYNC}:/mnt/sync
-      - TZ=Europe/Paris
     ports:
       - 22000:22000
       - 21027:21027/udp
     networks:
       - traefik-kim
     environment:
+      - TZ=Europe/Paris
       PGID: 1000
       PUID: 1000
     deploy:
