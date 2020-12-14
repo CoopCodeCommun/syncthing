@@ -36,4 +36,3 @@ networks:
     external: true
 
 
-PARTUUID=f588d8dc-a9a8-4842-b765-4cd34cfedbbe  /mnt/1TOsave/               ext4    defaults  0       1
