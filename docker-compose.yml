@@ -22,7 +22,8 @@ services:
       - "traefik.http.routers.sync-https.rule=Host(`${DOMAIN}`)"
       - "traefik.http.routers.sync-https.entrypoints=websecure"
       - "traefik.http.routers.sync-https.tl.scertresolver=myresolver"
-      - "traefik.http.services.sync.loadbalancer.server.port=8384"
+      - "traefik.http.routers.sync-https.service=special-port-service"
+      - "traefik.http.services.special-port-service.loadbalancer.server.port=8384"
       - "traefik.http.middlewares.redirect.redirectscheme.scheme=https"
     networks:
       - frontend
