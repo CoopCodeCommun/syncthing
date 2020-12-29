@@ -15,8 +15,9 @@ services:
       - PGID=0
       - TZ=Europe/Paris
     labels:
-      - traefik.http.routers.my-container.rule=Host(`sync.tibillet.re`)
-      - traefik.http.services.my-service.loadbalancer.server.port=8384
+      - traefik.http.routers.www-router.rule=Host(`sync.tibillet.re`)
+      - traefik.http.routers.www-router.service=www-service
+      - traefik.http.services.www-service.loadbalancer.server.port=8384
     networks:
       - frontend
     restart: always
