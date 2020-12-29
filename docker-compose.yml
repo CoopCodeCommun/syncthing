@@ -9,11 +9,13 @@ services:
     ports:
       - 22000:22000
       - 21027:21027/udp
+      - 8384:8384
     environment:
       - PUID=0
       - PGID=0
       - TZ=Europe/Paris
     labels:
+      - "traefik.port=8384"
       - "traefik.docker.network=frontend"
       - "traefik.enable=true"
       - "traefik.http.routers.sync-http.rule=Host(`${DOMAIN}`)"
@@ -22,8 +24,7 @@ services:
       - "traefik.http.routers.sync-https.rule=Host(`${DOMAIN}`)"
       - "traefik.http.routers.sync-https.entrypoints=websecure"
       - "traefik.http.routers.sync-https.tl.scertresolver=myresolver"
-      - "traefik.http.routers.sync-https.service=special-port-service"
-      - "traefik.http.services.special-port-service.loadbalancer.server.port=8384"
+      - "traefik.http.services.sync.loadbalancer.server.port=8384"
       - "traefik.http.middlewares.redirect.redirectscheme.scheme=https"
     networks:
       - frontend
