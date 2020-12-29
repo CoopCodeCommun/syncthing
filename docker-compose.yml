@@ -6,16 +6,16 @@ services:
     volumes:
       - ./config:/config
       - ${DIRECTORY_TO_SYNC}:/mnt/sync
+    expose:
+      - 8384
     ports:
       - 22000:22000
       - 21027:21027/udp
-      - 8384:8384
     environment:
       - PUID=0
       - PGID=0
       - TZ=Europe/Paris
     labels:
-      - "traefik.port=8384"
       - "traefik.docker.network=frontend"
       - "traefik.enable=true"
       - "traefik.http.routers.sync-http.rule=Host(`${DOMAIN}`)"
