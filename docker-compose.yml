@@ -17,16 +17,16 @@ services:
       - "traefik.enable=true"
       - "traefik.docker.network=frontend"
 
-      - "traefik.http.routers.test_machine-http.rule=Host(`${DOMAIN}`)"
-      - "traefik.http.routers.test_machine-http.entrypoints=entrypoints-http"
-      - "traefik.http.routers.test_machine-http.middlewares=redirect"
+      - "traefik.http.routers.syncthing-http.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.syncthing-http.entrypoints=entrypoints-http"
+      - "traefik.http.routers.syncthing-http.middlewares=redirect"
       - "traefik.http.middlewares.redirect.redirectscheme.scheme=https"
 
-      - "traefik.http.routers.test_machine-https.rule=Host(`${DOMAIN}`)"
-      - "traefik.http.routers.test_machine-https.entrypoints=entrypoints-https"
-      - "traefik.http.routers.test_machine-https.tls.certresolver=myresolver"
+      - "traefik.http.routers.syncthing-https.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.syncthing-https.entrypoints=entrypoints-https"
+      - "traefik.http.routers.syncthing-https.tls.certresolver=myresolver"
 
-      - "traefik.http.services.test_machine.loadbalancer.server.port=8384"
+      - "traefik.http.services.syncthing.loadbalancer.server.port=8384"
       
     networks:
       - frontend
