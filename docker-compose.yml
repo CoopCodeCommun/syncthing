@@ -6,8 +6,6 @@ services:
     volumes:
       - ./config:/config
       - ${DIRECTORY_TO_SYNC}:/mnt/sync
-    expose:
-      - 8384
     ports:
       - 22000:22000
       - 21027:21027/udp
