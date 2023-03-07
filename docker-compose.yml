@@ -1,0 +1,47 @@
+
+version: "3.7"
+services:
+  syncthing:
+    image: ghcr.io/linuxserver/syncthing
+    volumes:
+      - ./config:/config
+      - ${DIRECTORY_TO_SYNC}:/mnt/sync
+    ports:
+      - 8384:8384
+      - 22000:22000
+      - 21027:21027/udp
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Indian/Reunion
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=frontend"
+
+      - "traefik.http.routers.syncthing-http.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.syncthing-http.entrypoints=entrypoints-http"
+      - "traefik.http.routers.syncthing-http.middlewares=redirect"
+      - "traefik.http.middlewares.redirect.redirectscheme.scheme=https"
+
+      - "traefik.http.routers.syncthing-https.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.syncthing-https.entrypoints=entrypoints-https"
+      - "traefik.http.routers.syncthing-https.tls.certresolver=myresolver"
+
+      - "traefik.http.services.syncthing.loadbalancer.server.port=8384"
+      
+    networks:
+      - frontend
+    restart: always
+    deploy:
+        resources:
+            limits:
+              cpus: 0.50
+              memory: 512M
+
+
+
+networks:
+  frontend:
+    external: true
+
+
