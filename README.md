@@ -1,0 +1,2 @@
+# syncything
+Container Docker syncthing
