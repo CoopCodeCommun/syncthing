@@ -15,29 +15,15 @@ services:
       - PGID=0
       - TZ=Indian/Reunion
     labels:
-      - "traefik.enable=true"
-      - "traefik.docker.network=frontend"
+      - traefik.enable=true
+      - traefik.docker.network=frontend
+      - traefik.http.routers.syncthing.tls.certresolver=myresolver
+      - traefik.http.routers.syncthing.rule=Host(`$DOMAIN`)
+      - traefik.http.services.syncthing.loadbalancer.server.port=8384
 
-      - "traefik.http.routers.syncthing-http.rule=Host(`${DOMAIN}`)"
-      - "traefik.http.routers.syncthing-http.entrypoints=entrypoints-http"
-      - "traefik.http.routers.syncthing-http.middlewares=redirect"
-      - "traefik.http.middlewares.redirect.redirectscheme.scheme=https"
-
-      - "traefik.http.routers.syncthing-https.rule=Host(`${DOMAIN}`)"
-      - "traefik.http.routers.syncthing-https.entrypoints=entrypoints-https"
-      - "traefik.http.routers.syncthing-https.tls.certresolver=myresolver"
-
-      - "traefik.http.services.syncthing.loadbalancer.server.port=8384"
-      
     networks:
       - frontend
     restart: always
-    deploy:
-        resources:
-            limits:
-              cpus: 0.50
-              memory: 512M
-
 
 
 networks:
